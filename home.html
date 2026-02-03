@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trst - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+<body class="home-page">
+    <div class="liquid-overlay"></div>
+    <canvas id="particleCanvas"></canvas>
+    <div class="liquid-overlay"></div>
+   <div class="light-effect2"></div>
+    <div class="container">
+        <header class="home-header">
+            <div class="user-info">
+                <p class="signup-text">ยินดีต้อนรับ,</p>
+                <h2 id="display-username">Loading...</h2>
+            </div>
+            <button onclick="handleLogout()" class="btn-text-back">ออกจากระบบ</button>
+           
+        </header>
+
+        <div class="balance-card">
+            <div class="balance-content">
+                <p>ยอดเงินคงเหลือ</p>
+                <h1>฿ <span id="display-balance">0.00</span></h1>
+            </div>
+            <button class="btn-submit-purple" onclick="window.location.href='money.html'">+ เติมเงิน</button>
+        </div>
+
+        <div class="store-section">
+            <h3 class="signup-text">ร้านค้า / Store</h3>
+            <div class="store-grid">
+                <div class="item-card">
+                    <div class="item-icon">💎</div>
+                    <h4>Premium VIP</h4>
+                    <p></p>
+                    <span class="price">฿ 150</span>
+                    <button class="btn-submit-purple" onclick="window.location.href='qr.html'">ซื้อเลย</button>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+     
+
+    <script type="module" src="home.js"></script>
+</body>
+</html>

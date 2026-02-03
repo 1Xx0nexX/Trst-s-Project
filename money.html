@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trst - Topup</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Zen+Dots&display=swap" rel="stylesheet">
+</head>
+<body class="home-page">
+    <div class="light-effect"></div>
+    
+    <div class="container">
+        <header class="home-header">
+            <a href="home.html" class="btn-text-back2">← กลับ</a>
+            <h2 style="font-family: 'Zen Dots'; color: #8b5cf6;">TOPUP</h2>
+        </header>
+
+        <div class="balance-card" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(139, 92, 246, 0.3);">
+            <p>ยอดเงินปัจจุบันของคุณ</p>
+            <h1 style="font-family: 'Zen Dots';">฿ <span id="display-balance">0.00</span></h1>
+        </div>
+
+        <div class="store-section">
+            <h3 class="signup-text">ระบุจำนวนเงินที่ต้องการเติม</h3>
+            
+            <br>
+
+            <div class="input-group" style="margin-bottom: 15px;">
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #8b5cf6; font-weight: bold; font-size: 1.2rem;">฿</span>
+                    <input type="number" id="topup-amount" placeholder="0.00" 
+                           style="width: 100%; padding: 18px 20px 18px 45px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 2px solid rgba(139, 92, 246, 0.3); color: white; font-size: 1.5rem; font-family: 'Zen Dots';">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px;">
+                <button class="btn-quick-amount" onclick="setAmount(50)">50</button>
+                <button class="btn-quick-amount" onclick="setAmount(100)">100</button>
+                <button class="btn-quick-amount" onclick="setAmount(300)">300</button>
+                <button class="btn-quick-amount" onclick="setAmount(500)">500</button>
+                <button class="btn-quick-amount" onclick="setAmount(1000)">1,000</button>
+                <button class="btn-quick-amount" onclick="setAmount('')" style="color: #ff4d4d;">ล้าง</button>
+            </div>
+
+            <h3 class="signup-text">เลือกช่องทางชำระเงิน</h3>
+            <br>
+
+                <div class="item-card payment-card" onclick="goToQR('ธนาคาร')"style="padding-top: 20px;">
+                    <div class="item-icon">🏦</div>
+                    <h4>PromptPay</h4>
+                    <button class="btn-submit-purple" style="width: 100%; margin-top: 20px;padding-top: 20px;">เลือก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="home.js"></script>
+    <script>
+        function setAmount(val) { document.getElementById('topup-amount').value = val; }
+        function goToQR(method) {
+            const amount = document.getElementById('topup-amount').value;
+            if (!amount || amount <= 0) { alert("กรุณาระบุจำนวนเงิน"); return; }
+            window.location.href = `qr.html?amount=${amount}&method=${method}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trst - Create Account</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+</head>
+<body class="signup">
+    <div class="body.signup"></div>
+    <div class="light-effect"></div>
+    <div class="wave-overlay"></div>
+    <div class="liquid-overlay"></div>
+    <canvas id="particleCanvas"></canvas>
+</body>
+    
+    <div class="container">
+        <header class="header-bar3">
+            <a href="index.html" class="btn-text-back3">← Back</a>
+            
+        </header>
+
+        <main class="login-section">
+            <div class="signup-card">
+                <h2 class="card-title">สมัครสมาชิก</h2>
+                <p class="card-subtitle">โปรดใส่ข้อมูล</p>
+                
+                <form id="signupForm">
+                    <div class="input-group">
+                        <label><strong>Username</strong></label>
+                        <input type="text" id="reg-username" placeholder="Enter your name" required>
+                    </div>
+                    <div class="input-group">
+                        <label><strong>Email</strong><span class="Red">*</span></label>
+                        <input type="email" id="reg-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <label><strong>Password<span class="Red">*</span></strong></label>
+                        <input type="password" id="reg-password" placeholder="••••••••" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit-purple">Sign Up</button>
+                </form>
+                
+                <div class="card-footer">
+                
+                    <span class="footer-note">Already have an account? <a href="login.html">Login</a></span>
+                </div>
+            </div>
+        </main>
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <div id="successPopup" class="popup-overlay">
+        <div class="popup-card">
+            <div class="success-icon">
+                <svg viewBox="0 0 52 52">
+                    <circle cx="26" cy="26" r="25" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                    <path fill="none" stroke="#8b5cf6" stroke-width="3" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <h3>สมัครสมาชิกสำเร็จ!</h3>
+            <p>ระบบได้บันทึกข้อมูลของคุณเรียบร้อยแล้ว</p>
+            <button id="btn-done" class="btn-popup">ตกลง</button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

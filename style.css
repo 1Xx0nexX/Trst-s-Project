@@ -1,0 +1,964 @@
+/* ==================== แบคกาว,ลาย ================= */
+* {
+    margin: 0;
+    padding: ;
+    box-sizing: border-box;
+    font-family: "Zen Dots", sans-serif; 
+}
+
+.signup-text {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kanit", sans-serif; 
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* ล็อคความสูงให้พอดีหน้าจอ */
+    width: 100vw;
+    overflow: hidden; /* ป้องกันการไถหน้าจอไปมาจนหลุดขอบ */
+    
+}
+
+.particle-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* ให้อยู่หลังเนื้อหาอื่น */
+    
+
+}
+
+body.index {
+    background: linear-gradient(180deg, #2d0b4d 0%, #000000 100%);
+    display: flex;
+    justify-content: center; /* จัดกลางแนวนอน */
+    align-items: center;     /* จัดกลางแนวตั้ง */
+}
+
+body.signup {
+    background: linear-gradient(180deg, #2d0b4d 0%, #000000 100%);
+    display: flex;
+    justify-content: center; /* จัดกลางแนวนอน */
+    align-items: center;     /* จัดกลางแนวตั้ง */
+    filter: blur(6);
+}
+
+body.login {
+    background: linear-gradient(180deg, #2d0b4d 0%, #000000 100%);
+    display: flex;
+    justify-content: center; /* จัดกลางแนวนอน */
+    align-items: center;     /* จัดกลางแนวตั้ง */
+}
+body.home-page{
+    background: linear-gradient(180deg, #491c72 0%, #000000 100%);
+    display: flex;
+    justify-content: center; /* จัดกลางแนวนอน */
+    align-items: center;     /* จัดกลางแนวตั้ง */
+   
+}
+.container {
+    width: 100%;
+    max-width: 450px; /* ขนาดจำลองมือถือ */
+    height: 100dvh;   /* ใช้ dvh เพื่อให้พอดีกับแถบ Browser บนมือถือจริงๆ */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/*==================== ลายทับ bg ===================*/
+.liquid-overlay {
+    position: fixed; /* เปลี่ยนเป็น fixed เพื่อไม่ให้เลื่อนตามการ scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* ใส่ที่อยู่รูปภาพลายหินอ่อนของคุณ */
+    background-image: url('liquid.png'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* จุดสำคัญ: ทำให้ลายหินอ่อนจางและผสมกับสีพื้นหลัง */
+    opacity: 0.55; /* ปรับความชัดของลายตามชอบ (0.1 - 0.2 กำลังสวย) */
+    mix-blend-mode: overlay; /* ทำให้ลายหินอ่อนกลืนไปกับสีม่วง */
+    
+    pointer-events: none; /* ห้ามบังการคลิกปุ่ม */
+    z-index: 0; /* อยู่หลังปุ่มและตัวหนังสือ */
+}
+
+.wave-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+   
+    background-image: url('wave.png'); 
+    background-size: cover;
+    background-position: center;
+    
+    opacity: 0.55; /* ปรับความชัดลายตาม */
+    mix-blend-mode: overlay; /* ทำให้ลายกลืน */
+    
+    pointer-events: none; /* ห้ามบังการคลิกปุ่ม */
+    z-index: 0; /* อยู่หลังปุ่มและตัวหนังสือ */
+}
+
+/* ตรวจสอบให้แน่ใจว่าส่วนอื่นๆ อยู่บนลายหินอ่อน */
+.header-bar, .hero-section, #particleCanvas {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-text {
+    /* เพิ่มเงาเล็กน้อยเพื่อให้ตัวหนังสือลอยเด่นขึ้นมาจากลายหินอ่อน */
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* ==================== ปุ่มลอยtops < Index > ================= */
+
+/* .container ส่วนนี้ถูกยุบรวมกับด้านบนแล้วเพื่อความเป็นระเบียบ */
+
+.header-bar {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    /* จัดทุกอย่างใน Header ให้อยู่กึ่งกลางเสมอ */
+    justify-content: center; 
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: transparent;
+}
+
+.header-bar2 {
+    width: 100%;
+    padding: 122px,10px; /* ลดระยะห่างลงหน่อยให้พอดีกล่อง */
+    padding-top: 220px;
+    padding-left: 100px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: flex-end; /* ผลักปุ่มไปทางขวา */
+    align-items: center;
+    position: absolute; /* ลอยอยู่ภายในกล่อง */
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+@media (min-width: 1024px) { 
+    .header-bar2 {
+        /* ปรับให้ชิดขวา */
+        justify-content: flex-end; 
+        
+        /* ระยะห่างที่เหมาะสม (ลบ 3000px ออก) */
+        padding: 10px 20px; 
+        padding-top: 260px;
+        padding-right: 50px;
+        
+        /* ล็อคตำแหน่งให้อยู่บนสุดของกล่อง */
+        position: absolute;
+        top: 10px; 
+        right: 10px;
+        left: auto; /* เคลียร์ค่า left เดิม */
+        width: auto; /* ให้กว้างเท่าขนาดปุ่ม ไม่ต้องเต็มกล่อง */
+    }
+} 
+
+.header-bar3 {
+    width: 100%;
+    padding: 122px,10px; /* ลดระยะห่างลงหน่อยให้พอดีกล่อง */
+    padding-top: 150px;
+    padding-left: 100px;
+    padding-right: 50px;
+    display: flex;
+    justify-content: flex-end; /* ผลักปุ่มไปทางขวา */
+    align-items: center;
+    position: absolute; /* ลอยอยู่ภายในกล่อง */
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+@media (min-width: 1024px) { 
+    .header-bar3 {
+        /* ปรับให้ชิดขวา */
+        justify-content: flex-end; 
+        
+        /* ระยะห่างที่เหมาะสม (ลบ 3000px ออก) */
+        padding: 10px 20px; 
+        padding-top: 200px;
+        padding-right: 50px;
+        
+        /* ล็อคตำแหน่งให้อยู่บนสุดของกล่อง */
+        position: absolute;
+        top: 10px; 
+        right: 10px;
+        left: auto; /* เคลียร์ค่า left เดิม */
+        width: auto; /* ให้กว้างเท่าขนาดปุ่ม ไม่ต้องเต็มกล่อง */
+    }
+} 
+
+
+.auth-buttons {
+    background: rgba(0, 0, 0, 0.4); /* เข้มขึ้นเล็กน้อยเพื่อให้เห็นชัด */
+    padding: 6px 12px;
+    border-radius: 50px; /* ทรงแคปซูล */
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* ขอบเส้นบางๆ */
+}
+
+.auth-buttons2 {
+    background: rgba(0, 0, 0, 0.4); /* เข้มขึ้นเล็กน้อยเพื่อให้เห็นชัด */
+    padding: 7px 10px;
+    border-radius: 50px; /* ทรงแคปซูล */
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* ขอบเส้นบางๆ */
+
+    
+}
+
+button {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 20px; /* เพิ่มพื้นที่กดให้ใหญ่ขึ้น */
+    transition: all 0.3s ease;
+    border-radius: 40px;
+    white-space: nowrap; /* ป้องกันตัวอักษรตกบรรทัด */
+}
+
+button:hover { /* เอฟเฟกต์เมื่อ Hover หรือ Active */
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.btn-login {
+    margin-left: 5px; /* ระยะห่างระหว่างปุ่ม Login กับ Sign up */
+}
+
+/* ================= เนื้อหา  < Index >==================== */
+
+.hero-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px; /* ดันตัวหนังสือขึ้นเล็กน้อยเพื่อให้ดูสมดุลสายตา */
+}
+
+.logo-text {
+    font-size: clamp(80px, 20vw, 120px); /* ปรับขนาดฟอนต์ตามขนาดหน้าจออัตโนมัติ */
+    font-weight: bold;
+    color: #d1d1d1;
+    letter-spacing: -3px;
+    user-select: none; /* ห้ามคลุมดำตัวหนังสือ */
+}
+
+@media (max-width: 380px) { /* ปรับจูนพิเศษสำหรับมือถือจอเล็ก */
+    .header-bar {
+        padding: 15px;
+    }
+    button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+/* ==================== Particle ใต้ล่า ================= */
+#particleCanvas {
+    position: fixed; /* ใช้ fixed เพื่อให้หลุดออกจากกรอบ container */
+    top: 0;
+    left: 0;
+    /* บังคับความกว้างและความสูงให้เต็มหน้าจอ Browser */
+    width: 100vw !important; 
+    height: 100vh !important;
+    pointer-events: none;
+    z-index: 0; /* ให้อยู่หลังปุ่มและข้อความ */
+    display: block;
+    /* แก้ปัญหาเรื่องการกระพริบ */
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+@media (min-width: 1024px) { /* ปรับปุ่มfor pc */
+    /* 1. ขยายกล่องที่หุ้มปุ่มให้ใหญ่ขึ้น */
+    .auth-buttons {
+        padding: 16px 70px; 
+        gap: 10px; 
+        border-radius: 60px; 
+    }
+    /* 2. ขยายขนาดตัวอักษรและพื้นที่กดของปุ่ม */
+    button {
+        font-size: 18px; 
+        padding: 12px 30px; 
+        letter-spacing: 0.5px; 
+    }
+    /* 3. ปรับตำแหน่ง Header ให้ห่างจากขอบจอพอดีๆ ไม่ชิดเกินไป */
+    .header-bar {
+        padding: 40px 60px; 
+    }
+    /* 4. เพิ่มขนาดไอคอนหรือข้อความข้างเคียงถ้ามี */
+    .btn-login {
+        margin-left: 10px; 
+    }
+}
+
+/* ==================== สมัคร  < sign up >================= */
+
+/* ==================== แสงสีม่วงพุ่งลงมา (Light Ray Effect) ==================== */
+
+/* สร้างแสงสีม่วงพุ่งลงมา */
+.light-effect {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    width: 500px;
+    height: 100vh; /* ปรับลดจาก 200vh เหลือ 100vh เพื่อป้องกันหน้าจอยาวเกินไป */
+    background: linear-gradient(
+        to bottom,
+        #4b2077 0%,   /* สีม่วงสว่างขึ้น */
+        rgba(29, 1, 48, 0.534) 100%, 
+        transparent 100%
+    );
+    filter: blur(60px);       /* เพิ่มความฟุ้งเพื่อให้ดูเหมือนลำแสงอาทิตย์ */
+    transform: rotate(25deg) translateX(-50%);
+    pointer-events: none;     /* ห้ามลืม! เพื่อให้ยังกดปุ่มได้ */
+    z-index: 3;               /* ปรับเลขนี้ให้มากกว่าพื้นหลัง แต่ห้ามมากกว่าฟอร์ม */
+    animation: 
+        light-sway 10s ease-in-out infinite alternate,
+        light-glimmer 4s ease-in-out infinite alternate;
+}
+
+/* การส่ายแบบช้าๆ เหมือนลมพัด */
+@keyframes light-sway {
+    0% { transform: rotate(15deg) translateX(-60%) scaleX(0.8); }
+    100% { transform: rotate(25deg) translateX(-40%) scaleX(1.2); }
+}
+
+/* การวูบวาบของแสง (Glimmer) เหมือนมีเมฆบัง */
+@keyframes light-glimmer {
+    0% { opacity: 0.3; filter: blur(60px) brightness(1); }
+    30% { opacity: 0.6; filter: blur(50px) brightness(1.3); }
+    60% { opacity: 0.4; filter: blur(70px) brightness(0.9); }
+    100% { opacity: 0.7; filter: blur(55px) brightness(1.2); }
+}
+
+.signup-card, .login-card, .auth-buttons, .logo-text {
+    position: relative; 
+    z-index: 10;              /* ต้องสูงกว่า z-index ของแสง (1) */
+}
+
+/* สร้างแสงสีม่วงพุ่งลงมา */
+.light-effect2 {
+    position: fixed;
+    top: -20%;
+    left: 50%;
+    width: 500px;
+    height: 100vh; /* ปรับลดจาก 200vh เหลือ 100vh เพื่อป้องกันหน้าจอยาวเกินไป */
+    background: linear-gradient(
+        to bottom,
+        #5a298b 0%,   /* สีม่วงสว่างขึ้น */
+        rgba(29, 1, 48, 0.534) 100%, 
+        transparent 100%
+    );
+    filter: blur(60px);       /* เพิ่มความฟุ้งเพื่อให้ดูเหมือนลำแสงอาทิตย์ */
+    transform: rotate(25deg) translateX(-50%);
+    pointer-events: none;     /* ห้ามลืม! เพื่อให้ยังกดปุ่มได้ */
+    z-index: -1;               /* ปรับเลขนี้ให้มากกว่าพื้นหลัง แต่ห้ามมากกว่าฟอร์ม */
+    animation: 
+        light-sway 10s ease-in-out infinite alternate,
+        light-glimmer 4s ease-in-out infinite alternate;
+}
+
+/* การส่ายแบบช้าๆ เหมือนลมพัด */
+@keyframes light-sway {
+    0% { transform: rotate(15deg) translateX(-60%) scaleX(0.8); }
+    100% { transform: rotate(25deg) translateX(-40%) scaleX(1.2); }
+}
+
+/* การวูบวาบของแสง (Glimmer) เหมือนมีเมฆบัง */
+@keyframes light-glimmer {
+    0% { opacity: 0.3; filter: blur(60px) brightness(1); }
+    30% { opacity: 0.6; filter: blur(50px) brightness(1.3); }
+    60% { opacity: 0.4; filter: blur(70px) brightness(0.9); }
+    100% { opacity: 0.7; filter: blur(55px) brightness(1.2); }
+}
+
+.signup-card, .login-card, .auth-buttons, .logo-text {
+    position: relative; 
+    z-index: 10;              /* ต้องสูงกว่า z-index ของแสง (1) */
+}
+
+
+/* กล่อง Card หลัก */
+.signup-card {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.05); /* ความใสแบบกระจก */
+    backdrop-filter: blur(15px); /* เอฟเฟกต์เบลอ */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1.5px solid rgba(255, 255, 255, 0.1); /* เส้นขอบบางๆ รอบกล่อง */
+    border-radius: 24px; /* มุมนวแบบโมเดิร์น */
+    padding: 40px 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 0 15px rgba(255, 255, 255, 0.05); /* เพิ่ม Texture แสงสะท้อนในขอบ */
+    max-height: 85vh; /* ป้องกันกล่องยาวเกินหน้าจอมือถือ */
+    overflow-y: auto; /* หากเนื้อหายาวเกิน ให้เลื่อนแค่ภายในตัว Card */
+    scrollbar-width: none;
+}
+
+.signup-card::-webkit-scrollbar {
+    display: none; /* ซ่อนแถบเลื่อนแต่ยังเลื่อนดูข้างในได้ */
+}
+
+.card-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-align: left;
+    font-family: "Zen Dots", sans-serif; /* จัดระเบียบให้ตรงกับตัวอื่น */
+}
+
+.card-subtitle {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+    margin-left: 4px;
+    font-family: sans-serif; /* ปรับเพื่อให้อ่านง่ายขึ้น */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; 
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    font-family: sans-serif;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #8b5cf6; /* สีม่วงสว่างเวลาโฟกัส */
+    background: rgba(0, 0, 0, 0.07);
+}
+
+/* ปุ่มกดสีม่วง (Highlight) */
+.btn-submit-purple {
+    width: 100%;
+    padding: 16px;
+    background: #8b5cf6; 
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3);
+}
+
+.btn-submit-purple:hover {
+    background: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 15px 20px -5px rgba(139, 92, 246, 0.4);
+}
+
+/* ส่วนล่างของ Card */
+.card-footer {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-text-back {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    position: relative;
+    z-index: 100;
+}
+
+.btn-text-back2 {
+    background: rgba(255, 255, 255, 0.1); /* ใส่กล่องจางๆ ให้มือถือ */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    
+    color: rgba(255, 255, 255, 0.89);
+    cursor: pointer;
+    font-size: 12px; /* ขนาดพอดีกับมือถือ */
+    text-decoration: none;
+    font-family: "Zen Dots", sans-serif; 
+    transition: 0.3s;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* --- ล็อคเฉพาะหน้าจอคอมพิวเตอร์ (PC) ให้มีกล่อง --- */
+@media (min-width: 1024px) {
+    .btn-text-back2 {
+        background: rgba(255, 255, 255, 0.08); /* พื้นหลังกล่องแบบกระจกใส */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* ขอบกล่องบางๆ */
+        padding: 8px 20px; /* เพิ่มพื้นที่ในกล่อง */
+        border-radius: 12px; /* มุมมนให้ดูทันสมัย */
+        backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+        font-size: 14px; /* ขยายขนาดนิดหน่อยในคอม */
+    }
+
+    .btn-text-back2:hover {
+        background: rgba(139, 92, 246, 0.3); /* เปลี่ยนเป็นสีม่วงจางๆ เวลาชี้ */
+        border-color: rgba(139, 92, 246, 0.5);
+        color: #ffffff;
+        transform: translateY(-2px); /* ลอยขึ้นเล็กน้อย */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+
+
+.btn-text-back3 {
+    background: rgba(255, 255, 255, 0.1); /* ใส่กล่องจางๆ ให้มือถือ */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    
+    color: rgba(255, 255, 255, 0.89);
+    cursor: pointer;
+    font-size: 12px; /* ขนาดพอดีกับมือถือ */
+    text-decoration: none;
+    font-family: "Zen Dots", sans-serif; 
+    transition: 0.3s;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* --- ล็อคเฉพาะหน้าจอคอมพิวเตอร์ (PC) ให้มีกล่อง --- */
+@media (min-width: 1024px) {
+    .btn-text-back3 {
+        background: rgba(255, 255, 255, 0.08); /* พื้นหลังกล่องแบบกระจกใส */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* ขอบกล่องบางๆ */
+        padding: 8px 20px; /* เพิ่มพื้นที่ในกล่อง */
+        border-radius: 12px; /* มุมมนให้ดูทันสมัย */
+        backdrop-filter: blur(10px); /* เอฟเฟกต์กระจกฝ้า */
+        font-size: 14px; /* ขยายขนาดนิดหน่อยในคอม */
+    }
+
+    .btn-text-back3:hover {
+        background: rgba(139, 92, 246, 0.3); /* เปลี่ยนเป็นสีม่วงจางๆ เวลาชี้ */
+        border-color: rgba(139, 92, 246, 0.5);
+        color: #ffffff;
+        transform: translateY(-2px); /* ลอยขึ้นเล็กน้อย */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+
+.footer-note {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-note a {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/*===================== กล่อง < sign up >================= */
+
+.login-section {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+    width: 100%;
+    z-index: 2; /* ให้อยู่เหนือพื้นหลัง */
+}
+
+.login-section h2 {
+    font-family: "Kanit", sans-serif;
+    font-size: 30px;
+}
+
+.container > .header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.Red {
+  background: #ff0000 ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: lighter;
+}
+
+/* ===================== คลื่น ===================== */
+
+.wave-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 3; /* ปรับให้สูงขึ้นเล็กน้อยเพื่อความคม */
+    pointer-events: none;
+    filter: drop-shadow(0px -5px 15px rgba(139, 92, 246, 0.3));
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 18vh; 
+    min-height: 120px;
+    max-height: 200px;
+}
+
+/* ปรับสีและ Layer คลื่นให้มีความลึก (Parallax) */
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+/* ชั้นที่ 1: คลื่นหลังสุด (จางและช้า) */
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 10s;
+    fill: rgba(88, 28, 135, 0.3); 
+}
+
+/* ชั้นที่ 2: คลื่นกลาง (เริ่มมีน้ำหนัก) */
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 13s;
+    fill: rgba(139, 92, 246, 0.4); 
+}
+
+/* ชั้นที่ 3: คลื่นหน้า (เน้นความคม) */
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 16s;
+    fill: rgba(45, 11, 77, 0.6); 
+}
+
+/* ชั้นที่ 4: คลื่นหน้าสุด (ทึบและคมที่สุด) */
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 22s;
+    fill: #1a1a1a; 
+    stroke: rgb(58, 58, 58); 
+    stroke-width: 0.5px;
+}
+
+.parallax > use:nth-child(5) {
+    animation-duration: 22s;
+    fill: #1a1a1a; 
+}
+
+@keyframes move-forever {
+    0% { transform: translate3d(-90px, 0, 0); }
+    100% { transform: translate3d(85px, 0, 0); }
+}
+
+/* คอนเทนเนอร์เบื้องหลัง (Overlay) */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px); /* ทำให้พื้นหลังเบลอแบบกระจกฝ้า */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* ตัวการ์ด Popup */
+.popup-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 40px 30px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
+                inset 0 0 15px rgba(139, 92, 246, 0.2); /* เรืองแสงม่วงด้านในบางๆ */
+    
+    backdrop-filter: blur(20px);
+    transform: scale(0.7) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.popup-overlay.active .popup-card {
+    transform: scale(1) translateY(0);
+}
+
+/* ข้อความด้านใน */
+.popup-card h3 {
+    color: #fff;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.popup-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    margin-top: 10px;
+}
+
+/* อนิเมชันติ๊กถูก (ปรับปรุงใหม่) */
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.success-icon circle {
+    stroke: #8b5cf6;
+    stroke-width: 3;
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-linecap: round;
+    fill: rgba(139, 92, 246, 0.1);
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.success-icon path {
+    stroke: #fff;
+    stroke-width: 4;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke-linecap: round;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+@keyframes stroke {
+    to { stroke-dashoffset: 0; }
+}
+
+/* เอฟเฟกต์เรืองแสงที่ตัวเลข countdown */
+#countdown-text {
+    color: #8b5cf6;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+/* ===================== หน้าmain ===================== */
+
+/* --- [1] การตั้งค่าพื้นฐาน (Shared Styles) --- */
+body.home-page {
+    background: #0f0720;
+    overflow-y: auto !important;
+    min-height: 100vh;
+    font-family: 'Kanit', sans-serif;
+}
+
+/* เอฟเฟกต์พื้นหลัง */
+body.home-page .liquid-overlay, 
+body.home-page .wave-overlay {
+    backdrop-filter: none !important;      
+    opacity: 0.15;                        
+    mix-blend-mode: soft-light;            
+}
+
+/* --- [2] ส่วนหัว (Header Section) --- */
+.home-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.user-info h2 {
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 2.2rem;
+    color: #8b5cf6;
+}
+
+/* --- [3] บัตรยอดเงิน (Balance Card) --- */
+.balance-card {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(59, 130, 246, 0.8));
+    margin: 15px 20px;
+    padding: 25px;
+    border-radius: 25px;
+    color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.balance-content h1 {
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 2rem;
+}
+
+
+
+/* --- [4] ส่วนร้านค้า (Store Section) --- */
+.store-section {
+    padding: 20px;
+}
+
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* มือถือโชว์แถวละ 2 ช่อง */
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.item-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    transition: 0.3s;
+}
+
+.item-card:active { transform: scale(0.95); } /* เอฟเฟกต์ตอนกดในมือถือ */
+
+/* --- [5] แยกองค์ประกอบสำหรับคอมพิวเตอร์ (Desktop 1024px+) --- */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1000px; /* จำกัดความกว้างไม่ให้แผ่เต็มจอเกินไป */
+        margin: 0 auto;
+    }
+
+    /* จัด Layout ใหม่: ยอดเงินกับร้านค้าอยู่ระนาบเดียวกันได้ถ้าต้องการ */
+    .home-header {
+        padding: 40px 0;
+    }
+
+    .user-info h2 { font-size: 1.8rem; }
+
+    .balance-card {
+        flex-direction: row; /* ในคอมให้ยอดเงินกับปุ่มเติมเงินอยู่แถวเดียวกัน */
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+        padding: 40px;
+    }
+
+    .store-grid {
+        grid-template-columns: repeat(4, 1fr); /* ในคอมโชว์ 4 ช่องต่อแถว */
+        gap: 20px;
+    }
+
+    .item-card:hover {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: #8b5cf6;
+        transform: translateY(-5px); /* ลอยขึ้นเวลาชี้ */
+        box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+    }
+
+    /* ปุ่มออกจากระบบในคอม */
+    .btn-text-back {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        cursor: pointer;
+        padding: 8px 15px;
+        border-radius: 10px;
+        transition: 0.3s;
+    }
+
+    .btn-text-back:hover {
+        background: rgba(239, 68, 68, 0.2); /* พื้นหลังแดงจางๆ ตอนจะออก */
+        color: #ff4d4d;
+        transform: scale(1.05);
+    }
+}
+
+/* สไตล์ปุ่มลัด 50, 100, 300 */
+.btn-quick-amount {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    color: white;
+    padding: 12px;
+    border-radius: 15px;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-quick-amount:hover {
+    background: #8b5cf6;
+    border-color: #8b5cf6;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+}
+
+.btn-quick-amount:active {
+    transform: scale(0.95);
+}
+
+/* ปรับสีขอบ Input เมื่อถูกคลิก */
+#topup-amount:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
